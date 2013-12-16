@@ -1,0 +1,23 @@
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+  var socket = io.connect('http://192.168.1.110');
+  socket.on('running', function (data) {
+    console.log(data);
+    //socket.emit('my other event', { my: 'data' });
+    jQuery("#output").append("<div>" + data + "</div>");
+  });
+
+  jQuery(document).ready(function() {
+    jQuery("#exec").click(function() {
+      socket.emit('run');
+    });    
+  });
+</script>
+
+<input id="exec" type="button" value="Execute!" />
+
+<div id="output" />
+
